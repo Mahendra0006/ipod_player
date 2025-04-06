@@ -3,7 +3,7 @@ body {
   display: flex;
   width: 100vw;
   height: 90vh;
-  background-color: gray;
+  background-color: rgb(208, 201, 201);
   justify-content: center;
   align-items: center;
   margin: 0;

@@ -1,19 +1,29 @@
+// Import React to use class-based components
 import React from "react";
-import Navbar from "../shared/Navbar";
-import Menu from "../menu/Menu";
-import Music from "../music/Music";
-import Songs from "../music/Songs";
-import Settings from "../settings/Settings";
-import Playing from "../music/Playing";
+
+// Import subcomponents used within the display screen
+import Navbar from "../shared/Navbar"; // Top bar showing battery, notification, etc.
+import Menu from "../menu/Menu"; // Main menu
+import Music from "../music/Music"; // Music submenu
+import Songs from "../music/Songs"; // Song list under music
+import Settings from "../settings/Settings"; // Settings menu
+import Playing from "../music/Playing"; // Music player screen
+import Themes from "../menu/Themes"; // Theme selection screen
+import WheelColor from "../settings/WheelColor"; // Wheel color selection screen
+import LockScreen from "../LockScreen"; // Lock screen display
+import Wallpaper from "../menu/Wallpaper"; // Wallpaper selection screen
+
+// Import associated CSS for display styling
 import "../../styles/Display.css";
-import Themes from "../menu/Themes";
-import WheelColor from "../settings/WheelColor";
-import LockScreen from "../LockScreen";
-import Wallpaper from "../menu/Wallpaper";
 
-
+/*
+ * The Display component acts as the screen of the iPod.
+ * It conditionally renders subcomponents based on the current menu context.
+ * Wallpaper is set as the background image of the screen.
+ */
 class Display extends React.Component {
   render() {
+    // Destructure all the props passed from Case
     const {
       active,
       currentMenu,
@@ -30,20 +40,25 @@ class Display extends React.Component {
       noty,
       setNoty,
       notifyText,
+      batteryLevel,
     } = this.props;
 
     return (
+      // Set the background wallpaper for the screen
       <div
         style={{ backgroundImage: `url(${wallpaperItems[wallpaper]})` }}
         className="display"
       >
+        {/* Render the top Navbar */}
         <Navbar
           noty={noty}
           setNoty={setNoty}
           playing={playing}
           notifyText={notifyText}
+          batteryLevel={batteryLevel}
         />
-        {currentMenu === -2 && <LockScreen />}
+        {/* Conditional rendering based on currentMenu value */}
+        {currentMenu === -2 && <LockScreen />} {/* Lock screen */}
         {currentMenu === -1 && (
           <Menu songImgUrl={songImgUrl} menuItems={menuItems} active={active} />
         )}
@@ -65,6 +80,7 @@ class Display extends React.Component {
             <h1 className="empty-text">Albums</h1>
           </div>
         )}
+        {/* Show Playing screen from Music Player or Now Playing shortcut */}
         {(currentMenu === 0 || currentMenu === 7) && (
           <Playing
             songImgUrl={songImgUrl}
@@ -75,6 +91,7 @@ class Display extends React.Component {
             songItems={songItems}
           />
         )}
+        {/* Settings submenus */}
         {currentMenu === 8 && <Themes active={active} />}
         {currentMenu === 9 && <WheelColor active={active} />}
         {currentMenu === 10 && <Wallpaper active={active} />}
@@ -83,4 +100,5 @@ class Display extends React.Component {
   }
 }
 
+// Export Display component to be used inside Case.js
 export default Display;

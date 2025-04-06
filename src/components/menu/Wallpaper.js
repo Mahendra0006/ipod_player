@@ -1,22 +1,39 @@
-import React from 'react';
+// Import React to create a class component
+import React from "react";
 
-// Renders wallpaper menu
+// Wallpaper component - renders the wallpaper selection menu
 class Wallpaper extends React.Component {
-    render() {
-        const {active} = this.props;
-        return (
-            <div className="music">
-                <h2>Wallpaper Select</h2>
-                <ul>
-                    {["Wallpaper 1","Wallpaper 2","Wallpaper 3"].map((element,index)=>{
-                        return active===index?<li key={index} className="active theme-li">{element}</li>:<li className="theme-li" key={index}>{element} </li>
-                    })}
-                </ul>
-            </div>
+  render() {
+    // Destructure the 'active' index from props to highlight the selected wallpaper
+    const { active } = this.props;
 
-        )
-    }
+    return (
+      <div className="music">
+        {/* Title of the wallpaper selection screen */}
+        <h2>Wallpaper Select</h2>
 
+        {/* List of available wallpaper options */}
+        <ul>
+          {/* Map through wallpaper names and render each one */}
+          {["Wallpaper 1", "Wallpaper 2", "Wallpaper 3"].map(
+            (wallpaper, index) => {
+              // If current index matches 'active', add 'active' class for highlighting
+              return active === index ? (
+                <li key={index} className="active theme-li">
+                  {wallpaper}
+                </li>
+              ) : (
+                <li key={index} className="theme-li">
+                  {wallpaper}
+                </li>
+              );
+            }
+          )}
+        </ul>
+      </div>
+    );
+  }
 }
 
+// Export the component so it can be used in other parts of the application
 export default Wallpaper;

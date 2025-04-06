@@ -8,8 +8,8 @@ class Songs extends React.Component {
             <div className="music">
                 <h3>Songs</h3>
                 <ul>
-                {songItems.map((element, index)=>{
-                            return active===index?<li key={index} className="active">&nbsp;{element}</li>:<li  id="song1" key={index}>&nbsp;{element}</li>
+                {songItems.map((songs, index)=>{
+                            return active===index?<li key={index} className="active">&nbsp;{songs}</li>:<li  id="song1" key={index}>&nbsp;{songs}</li>
                         })}
                 </ul>
             </div>
